@@ -12,9 +12,9 @@ jobs:
         MY_VAR: Hi there! My name is
         FIRST_NAME: rex
         MIDDLE_NAME: dot
-        LAST_NAME: zheng
+        LAST_NAME: zheng13
       run: |
         pwd
-        ll
+        ls -l
         echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
         echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME. > rexzheng.txt
