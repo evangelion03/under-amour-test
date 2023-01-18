@@ -14,5 +14,7 @@ jobs:
         MIDDLE_NAME: dot
         LAST_NAME: zheng
       run: |
+        pwd
+        ll
         echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
         echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME. > rexzheng.txt
