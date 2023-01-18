@@ -5,13 +5,13 @@ on:
 
 jobs:
   CIJOB:
-    runs-on: zheng'
+    runs-on: rexzheng
     steps:
     - name: Print a greeting
       env:
         MY_VAR: Hi there! My name is
-        FIRST_NAME: Mona
-        MIDDLE_NAME: The
-        LAST_NAME: Octocat
+        FIRST_NAME: rex
+        MIDDLE_NAME: dot
+        LAST_NAME: zheng
       run: |
         echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
