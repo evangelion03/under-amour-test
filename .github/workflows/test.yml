@@ -1,0 +1,16 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  hello:
+    runs-on: zheng
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run a multi-line script
+        run: |
+          echo 'this is rexzheng' > rexzheng.txt
+          date
+          uname -a
