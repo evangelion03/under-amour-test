@@ -8,5 +8,4 @@ jobs:
     runs-on: zheng'
     steps:
       - name: Run a multi-line script
-        run: |
-          echo 'this is rexzheng' > rexzheng.txt
+        run: PWD
