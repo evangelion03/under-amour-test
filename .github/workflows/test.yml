@@ -12,7 +12,7 @@ jobs:
         MY_VAR: Hi there! My name is
         FIRST_NAME: rex
         MIDDLE_NAME: dot
-        LAST_NAME: zheng14
+        LAST_NAME: zheng16
       run: |
         pwd
         ls -l
