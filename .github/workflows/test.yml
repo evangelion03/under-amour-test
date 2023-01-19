@@ -5,9 +5,9 @@ on:
 
 jobs:
   CIJOB:
-    runs-on: rexzheng
+    runs-on: aliyunECS
     steps:
-    - name: Print a greeting
+    - name: ECS
       env:
         MY_VAR: Hi there! My name is
         FIRST_NAME: rex
