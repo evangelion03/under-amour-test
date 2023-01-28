@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v3
     - name: build
       run: |
-        docker build -t $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID .
+        docker build -t $ACR:$GITHUB_RUN_ID .
         docker login -u $DOCKERUSER $ACR -p $DOCKERPASSWD
         docker push $ACR:$GITHUB_RUN_ID
         docker image ls | grep $ACR/$DOCKERIMAGE
