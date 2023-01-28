@@ -7,7 +7,7 @@ jobs:
   CIJOB:
     runs-on: aliyunECS
     env:
-      ACR: "registry-vpc.cn-shanghai.aliyuncs.com/ua-test/testforunderarmour"
+      ACR: "registry-vpc.cn-shanghai.aliyuncs.com/ua-test/rexzhengflask"
       DOCKERIMAGE: "rexzhengflask"
       DOCKERUSER: liangdu
       DOCKERPASSWD: Aa@12345
@@ -20,7 +20,7 @@ jobs:
       run: |
         docker build -t $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID .
         docker login -u $DOCKERUSER $ACR -p $DOCKERPASSWD
-        docker push $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID
+        docker push $ACR:$GITHUB_RUN_ID
         docker image ls | grep $ACR/$DOCKERIMAGE
         docker rmi $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID
     - name: deploy
