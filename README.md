@@ -1,3 +1,0 @@
-rexzheng
-AliyunECS
-V6
