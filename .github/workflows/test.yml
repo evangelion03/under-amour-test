@@ -9,13 +9,17 @@ jobs:
     env:
       ACR: "registry-vpc.cn-shanghai.aliyuncs.com/ua-test/testforunderarmour"
       DOCKERIMAGE: "rexzhengflask"
+      DOCKERUSER: liangdu
+      DOCKERPASSWD: Aa@12345
       K8SYAML: "UnderArmourtest.yaml"
+
     steps:
     - name: Checkout
       uses: actions/checkout@v3
     - name: build
       run: |
         docker build -t $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID .
+        docker login -u $DOCKERUSER $ACR -p $DOCKERPASSWD
         docker push $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID
         docker image ls | grep $ACR/$DOCKERIMAGE
         docker rmi $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID
