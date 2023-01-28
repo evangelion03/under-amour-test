@@ -1,21 +1,14 @@
-FROM python:3.8-buster
-
+FROM python3:v1.0
+##作者信息
 MAINTAINER rex_zheng@flyingnets.com
-LABEL author="rex_zheng" email="rex_zheng@flyingnets.com"  purpose="flask基础镜像"
+LABEL author="rex_zheng" email="rex_zheng@flyingnets.com"  purpose="flask-ubuntu基础镜像"
+##设置环境变量，因为flask运行要export LC_ALL=C.UTF-8和
 
-# 配置一下国内的agt源
-RUN sed -i s/archive.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list
-RUN apt-get update && apt-get install -y vim \
-        nginx
-
-#安装Flask模块
-RUN pip3 install flask
 
 #导入Flask服务脚本
 COPY flaskzheng.py /usr/local/flaskzheng.py
 
-#暴露标准flask端口5000
+##暴露端口
 EXPOSE 5000
-
-#执行flask启动
-CMD ["python","/usr/local/flaskzheng.py"]  
+##设置容器启动时就启动服务
+ENTRYPOINT ["python3", "/usr/local/flaskzheng.py"]
