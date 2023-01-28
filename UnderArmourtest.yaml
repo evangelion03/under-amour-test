@@ -13,6 +13,8 @@ spec:
       labels:
         app: web
     spec:
+      imagePullSecrets:
+        - name: testforacr
       containers:
         - name: flaskapp-demo
           image: REPOSITORY:ID
