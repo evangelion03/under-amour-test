@@ -5,7 +5,7 @@ on:
 
 jobs:
   CIJOB:
-    runs-on: aliyunECS
+    runs-on: self-hosted
     steps:
     - name: Checkout
       uses: actions/checkout@v3
