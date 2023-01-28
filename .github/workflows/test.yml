@@ -22,11 +22,10 @@ jobs:
         docker login -u $DOCKERUSER $ACR -p $DOCKERPASSWD
         docker push $ACR:$GITHUB_RUN_ID
         docker image ls | grep $ACR/$DOCKERIMAGE
-        docker rmi $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID
+        docker rmi $ACR:$GITHUB_RUN_ID
     - name: deploy
       run: |
         eval sed -i 's/REPOSITORY/$ACR/g' $K8SYAML
-        eval sed -i 's/IMAGE/$DOCKERIMAGE/g' $K8SYAML
         eval sed -i 's/ID/$GITHUB_RUN_ID/g' $K8SYAML
         kubectl apply -f $K8SYAML
 
