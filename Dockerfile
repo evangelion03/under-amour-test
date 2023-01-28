@@ -6,6 +6,7 @@ LABEL author="rex_zheng" email="rex_zheng@flyingnets.com"  purpose="python"
 
 
 #导入Flask服务脚本
+RUN pip install flask
 COPY flaskzheng.py /usr/local/flaskzheng.py
 
 ##暴露端口
