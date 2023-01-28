@@ -21,7 +21,7 @@ jobs:
         docker build -t $ACR:$GITHUB_RUN_ID .
         docker login -u $DOCKERUSER $ACR -p $DOCKERPASSWD
         docker push $ACR:$GITHUB_RUN_ID
-        docker image ls | grep $ACR/$DOCKERIMAGE
+        docker image ls | grep $ACR
         docker rmi $ACR:$GITHUB_RUN_ID
     - name: deploy
       run: |
