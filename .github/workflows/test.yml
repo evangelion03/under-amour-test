@@ -9,14 +9,21 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: ECS
+    - name: init
       env:
-        MY_VAR: Hi there! My name is
-        FIRST_NAME: rex
-        MIDDLE_NAME: dot
-        LAST_NAME: zheng17
+        ACR: "registry-vpc.cn-shanghai.aliyuncs.com/ua-test/testforunderarmour"
+        DOCKERIMAGE: "rexzhengflask"
+        K8SYAML: "UnderArmourtest.yaml"
+    - name: build
       run: |
-        pwd
-        ls -l
-        echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME.
-        echo $MY_VAR $FIRST_NAME $MIDDLE_NAME $LAST_NAME. > rexzheng.txt
+        docker build -t $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID .
+        docker push $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID
+        docker image ls | grep $ACR/$DOCKERIMAGE
+        docker rmi $ACR/$DOCKERIMAGE:$GITHUB_RUN_ID
+    - name: deploy
+      run: |
+        eval sed -i 's/REPOSITORY/$ACR/g' $K8SYAML
+        eval sed -i 's/IMAGE/$DOCKERIMAGE/g' $K8SYAML
+        eval sed -i 's/ID/$GITHUB_RUN_ID/g' $K8SYAML
+        kubectl apply -f $K8SYAML
+
