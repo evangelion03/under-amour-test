@@ -5,12 +5,12 @@ on:
 
 jobs:
   CIJOB:
-    runs-on: rexzheng
+    runs-on: aliyunECS
     env:
-      REGION: "ap-northeast-1"
-      EKSCLUSTER: "test-eks"
-      ECR: "555411786219.dkr.ecr.ap-northeast-1.amazonaws.com"
+      ACR: "registry-vpc.cn-shanghai.aliyuncs.com/ua-test/rexzhengflask"
       DOCKERIMAGE: "rexzhengflask"
+      DOCKERUSER: liangdu
+      DOCKERPASSWD: Aa@12345
       K8SYAML: "UnderArmourtest.yaml"
 
     steps:
@@ -18,16 +18,14 @@ jobs:
       uses: actions/checkout@v3
     - name: build
       run: |
-        docker build -t $ECR/$DOCKERIMAGE:$GITHUB_RUN_ID .
-        aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR
-        docker push $ECR/$DOCKERIMAGE:$GITHUB_RUN_ID
-        docker image ls | grep $ECR/$DOCKERIMAGE
-        docker rmi $ECR/$DOCKERIMAGE:$GITHUB_RUN_ID
+        docker build -t $ACR:$GITHUB_RUN_ID .
+        docker login -u $DOCKERUSER $ACR -p $DOCKERPASSWD
+        docker push $ACR:$GITHUB_RUN_ID
+        docker image ls | grep $ACR
+        docker rmi $ACR:$GITHUB_RUN_ID
     - name: deploy
       run: |
-        aws eks --region $REGION update-kubeconfig --name $EKSCLUSTER
-        eval sed -i 's!REPOSITORY!$ECR!g' $K8SYAML
-        eval sed -i 's!IMAGE!$DOCKERIMAGE!g' $K8SYAML
+        eval sed -i 's!REPOSITORY!$ACR!g' $K8SYAML
         eval sed -i 's!ID!$GITHUB_RUN_ID!g' $K8SYAML
         kubectl apply -f $K8SYAML
 
