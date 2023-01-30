@@ -19,6 +19,7 @@ jobs:
     - name: build
       run: |
         docker build -t $ECR/$DOCKERIMAGE:$GITHUB_RUN_ID .
+        aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $ECR
         docker push $ECR/$DOCKERIMAGE:$GITHUB_RUN_ID
         docker image ls | grep $ECR/$DOCKERIMAGE
         docker rmi $ECR/$DOCKERIMAGE:$GITHUB_RUN_ID
