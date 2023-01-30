@@ -11,7 +11,7 @@ jobs:
       EKSCLUSTER: "test-eks"
       ECR: "555411786219.dkr.ecr.ap-northeast-1.amazonaws.com"
       DOCKERIMAGE: "rexzhengflask"
-      K8SYAML: "ekstest.yaml"
+      K8SYAML: "UnderArmourtest.yaml"
 
     steps:
     - name: Checkout
