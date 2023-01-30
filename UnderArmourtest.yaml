@@ -17,7 +17,7 @@ spec:
         - name: testforacr
       containers:
         - name: flaskapp-demo
-          image: REPOSITORY:ID
+          image: REPOSITORY/IMAGE:ID
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
